@@ -14,17 +14,18 @@ import java.util.Arrays;
 public class  Sequence {
 
     private int capacity;
-    private int lenght;
+    private int length;
     private int[] array;
 
     public Sequence() {
         this.capacity = 100;
+        this.length = 0;
         array = new int[capacity];
     }
 
 
     public int getLength() {
-        return this.lenght;
+        return this.length;
     }
 
     public void insert(int item) {
@@ -33,11 +34,14 @@ public class  Sequence {
             int[] tmpArray = this.array;
             this.array = Arrays.copyOf(tmpArray, this.capacity);
         }
-        this.array[getLength()+1] = item;
+        this.array[this.getLength()] = item;
+        this.length++;
     }
 
     public void delete() {
-        this.lenght -= 1;
+        if (getLength() > 0) {
+            this.length -= 1;
+        }
     }
 
     public int lookup(int item) throws ArrayIndexOutOfBoundsException{
