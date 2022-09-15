@@ -8,32 +8,44 @@
 package no.ntnu.idata2302.lab02;
 
 
+import java.io.ObjectStreamException;
+import java.util.Arrays;
 
-public class Sequence {
+public class  Sequence {
 
     private int capacity;
-    private int length;
+    private int lenght;
+    private int[] array;
 
     public Sequence() {
         this.capacity = 100;
-        this.length = length;
+        array = new int[capacity];
     }
 
 
     public int getLength() {
-        return this.length;
+        return this.lenght;
     }
 
-    public void insert(int index, int item) {
-        // TODO
+    public void insert(int item) {
+        if (this.array.length+1 > this.capacity) {
+            this.capacity *= 2;
+            int[] tmpArray = this.array;
+            this.array = Arrays.copyOf(tmpArray, this.capacity);
+        }
+        this.array[getLength()+1] = item;
     }
 
-    public void remove(int index, int item) {
-        // TODO
+    public void delete() {
+        this.lenght -= 1;
     }
 
-    public void search(int item) {
-        // TODO
+    public int lookup(int item) throws ArrayIndexOutOfBoundsException{
+        for (int i = 0; i < this.getLength(); i++) {
+            if (this.array[i] == item) {
+                return item;
+            }
+        }
+        throw new ArrayIndexOutOfBoundsException("Could not find any matching items in array");
     }
-
 }
